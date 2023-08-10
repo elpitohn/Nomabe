@@ -1,0 +1,33 @@
+name: nomabe
+description: Nomabe an application that allows digital nomads to travel the world in a new, fast and simple way
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0-378.0.dev <4.0.0'
+
+dependencies:
+  go_router: ^10.0.0
+  get_it: ^7.6.0
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  graphql_flutter: ^5.1.2
+  bloc_pattern: ^3.0.1
+  rxdart: ^0.27.7
+  bloc_test: ^9.1.4
+  email_validator: ^2.1.17
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  mockito: ^5.4.2
+  network_image_mock: ^2.1.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/nomabe_logo.png
