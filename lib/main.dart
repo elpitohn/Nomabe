@@ -22,6 +22,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp.router(
       theme: NomabeTheme.theme,
       routerConfig: NomabeRouter.router,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -2,20 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nomabe/core/data/constants/strings.dart';
 import 'package:nomabe/core/themes/nomabetheme.dart';
+import 'package:nomabe/home/presentation/homepage.dart';
+import 'package:nomabe/list/presentation/listpage.dart';
+import 'package:nomabe/splash/presentation/widget/splash.dart';
 
 import '../../login/presentation/loginpage.dart';
 import '../../register/presentation/registerpage.dart';
-import '../presentation/mainpage.dart';
 
 class NomabeRouter {
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
-      name: RouteNameConstants.login,
-      path:
-          "/", // Modify so the first confirms the login (maybe splash screen?)
+      name: RouteNameConstants.splash,
+      path: "/",
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
-        child: MaterialApp(theme: NomabeTheme.theme, home: LoginPage()),
+        child: Scaffold(
+          body: SplashScreen(),
+        ),
+      ),
+    ),
+    GoRoute(
+      name: RouteNameConstants.login,
+      path: "/login",
+      pageBuilder: (context, state) => MaterialPage(
+        key: state.pageKey,
+        child: const Scaffold(
+          body: LoginPage(),
+        ),
       ),
     ),
     GoRoute(
@@ -23,24 +36,34 @@ class NomabeRouter {
       path: "/createAccount",
       pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
-          child: MaterialApp(theme: NomabeTheme.theme, home: RegisterPage())),
+          child: const Scaffold(
+            body: RegisterPage(),
+          )),
     ),
     GoRoute(
       name: RouteNameConstants.home,
       path: "/home",
-      pageBuilder: (context, state) {
-        final args = state.extra as Map<String, dynamic>?;
-
-        final String title = args?["pageTitle"] ?? "";
-        final String userId = args?["userId"] ?? "";
-
-        return MaterialPage(
-            key: state.pageKey,
-            child: MaterialApp(
-              theme: NomabeTheme.theme,
-              home: MainPage(title: title, userId: userId),
-            ));
-      },
+      pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: Scaffold(
+            body: ListPage(),
+          )),
     ),
+    // GoRoute(
+    //   name: RouteNameConstants.home,
+    //   path: "/home",
+    //   pageBuilder: (context, state) {
+    //     final args = state.extra as Map<String, dynamic>?;
+
+    //     final String title = args?["pageTitle"] ?? "";
+    //     final String userId = args?["userId"] ?? "";
+
+    //     return MaterialPage(
+    //         key: state.pageKey,
+    //         child: Scaffold(
+    //           body: MainPage(title: title, userId: userId),
+    //         ));
+    //   },
+    // ),
   ]);
 }

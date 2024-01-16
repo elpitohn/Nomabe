@@ -48,11 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             const NomabeTextFieldWidget(
               textState: 2,
-              textHint: "Nova senha",
-            ),
-            const NomabeTextFieldWidget(
-              textState: 2,
-              textHint: "Confirme sua senha",
+              textHint: "Insira seu CPF",
             ),
             NomabeLowPadding(
                 child: Column(

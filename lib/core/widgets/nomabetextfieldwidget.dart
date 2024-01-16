@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
+import 'package:flutter/services.dart';
 import 'package:nomabe/core/themes/nomabetokens.dart';
 import 'package:nomabe/core/widgets/nomabepadding.dart';
+import 'package:libphonenumber/libphonenumber.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../data/constants/strings.dart';
 
@@ -25,12 +27,12 @@ class NomabeTextFieldWidget extends StatefulWidget {
 class _GenericNomabeTextFieldWidgetState extends State<NomabeTextFieldWidget> {
   Widget getWidget() {
     switch (widget.textState) {
-      case 1: //email
-        return EmailView(
+      case 1: //Number
+        return NumberView(
           textHint: widget.textHint,
         );
       case 2: //password
-        return PasswordView(
+        return CPFView(
           textHint: widget.textHint,
         );
       case 3: //search
@@ -52,8 +54,8 @@ class _GenericNomabeTextFieldWidgetState extends State<NomabeTextFieldWidget> {
   }
 }
 
-class EmailView extends StatefulWidget {
-  const EmailView({
+class NumberView extends StatefulWidget {
+  const NumberView({
     this.textHint = "",
     Key? key,
   }) : super(key: key);
@@ -61,10 +63,10 @@ class EmailView extends StatefulWidget {
   final String textHint;
 
   @override
-  _EmailViewState createState() => _EmailViewState();
+  _NumberViewState createState() => _NumberViewState();
 }
 
-class _EmailViewState extends State<EmailView> {
+class _NumberViewState extends State<NumberView> {
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -72,9 +74,16 @@ class _EmailViewState extends State<EmailView> {
     return TextFormField(
       controller: _controller,
       style: const TextStyle(color: NomabeTokens.nomabeBlack),
-      validator: (email) =>
-          EmailValidator.validate(email!) ? null : CoreStrings.emailValidator,
+      validator: (number) => validatePhoneNumber(number),
       maxLines: 1,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+        MaskTextInputFormatter(
+          mask: '+## (##) ######-####',
+          filter: {"#": RegExp(r'[0-9]')},
+        ),
+      ],
+      keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.none,
       decoration: InputDecoration(
         fillColor: NomabeTokens.nomabeWhite,
@@ -83,14 +92,34 @@ class _EmailViewState extends State<EmailView> {
         border: const OutlineInputBorder(),
         contentPadding: const EdgeInsets.all(10),
         hintText:
-            widget.textHint.isNotEmpty ? widget.textHint : 'email@email.com',
+            widget.textHint.isNotEmpty ? widget.textHint : '+111234567890',
       ),
     );
   }
+
+  String? validatePhoneNumber(String? phoneNumber) {
+    var phone = phoneNumber ?? '';
+
+    Future<bool?> validate() async {
+      final isValid = await PhoneNumberUtil.isValidPhoneNumber(
+          phoneNumber: phone, isoCode: 'BR');
+      if (isValid == null || !isValid) {
+        return false;
+      }
+
+      return true;
+    }
+
+    if (phoneNumber == null || phoneNumber.isEmpty || validate() == false) {
+      return CoreStrings.numberValidator;
+    } else {
+      return null;
+    }
+  }
 }
 
-class PasswordView extends StatefulWidget {
-  const PasswordView({
+class CPFView extends StatefulWidget {
+  const CPFView({
     this.textHint = "",
     Key? key,
   }) : super(key: key);
@@ -98,22 +127,27 @@ class PasswordView extends StatefulWidget {
   final String textHint;
 
   @override
-  _PasswordViewState createState() => _PasswordViewState();
+  _CPFViewState createState() => _CPFViewState();
 }
 
-class _PasswordViewState extends State<PasswordView> {
+class _CPFViewState extends State<CPFView> {
   final TextEditingController _controller = TextEditingController();
-
-  bool _isObscured = true;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller,
-      obscureText: _isObscured,
       maxLines: 1,
       style: const TextStyle(color: NomabeTokens.nomabeBlack),
+      keyboardType: TextInputType.number,
       textCapitalization: TextCapitalization.none,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+        MaskTextInputFormatter(
+          mask: '###.###.###-##',
+          filter: {"#": RegExp(r'[0-9]')},
+        ),
+      ],
       decoration: InputDecoration(
         fillColor: NomabeTokens.nomabeWhite,
         filled: true,
@@ -123,14 +157,6 @@ class _PasswordViewState extends State<PasswordView> {
         hintText: widget.textHint.isNotEmpty
             ? widget.textHint
             : CoreStrings.passwordHintText,
-        suffixIcon: IconButton(
-          icon: Icon(_isObscured ? Icons.visibility : Icons.visibility_off),
-          onPressed: () {
-            setState(() {
-              _isObscured = !_isObscured;
-            });
-          },
-        ),
       ),
     );
   }

@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:nomabe/core/themes/nomabetokens.dart';
 
 class NomabeTheme {
+  NomabeTheme._();
+
   static final theme = ThemeData.from(
     colorScheme: const ColorScheme(
       primary: NomabeTokens.nomabeDarkBlue,
       secondary: NomabeTokens.nomabeTeal,
-      surface: NomabeTokens.nomabeDarkBrown,
-      background: NomabeTokens.nomabeDarkBrown,
+      surface: NomabeTokens.nomabeBlue,
+      background: NomabeTokens.nomabeBlue,
       error: NomabeTokens.nomabeRed,
       onPrimary: NomabeTokens.nomabeGrey,
-      onSecondary: NomabeTokens.nomabeDarkBrown,
+      onSecondary: NomabeTokens.nomabeBlue,
       onSurface: NomabeTokens.nomabeGrey,
       onBackground: NomabeTokens.nomabeGrey,
       onError: NomabeTokens.nomabeGrey,

@@ -1,11 +1,17 @@
 class CoreStrings {
-  static const String emailValidator = "Por favor, entre um e-mail válido";
+  CoreStrings._();
+
+  static const String numberValidator = "Por favor, entre um número válido";
   static const String passwordHintText = "**********";
   static const String searchHintText = "Buscar";
 }
 
 class RouteNameConstants {
-  static const String login = "Login";
-  static const String register = "CriarConta";
-  static const String home = "Home";
+  RouteNameConstants._();
+
+  static const String splash = "splash";
+  static const String login = "login";
+  static const String register = "create_account";
+  static const String home = "home";
+  static const String start = "start";
 }

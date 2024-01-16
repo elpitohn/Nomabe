@@ -39,9 +39,6 @@ class _LoginPageState extends State<LoginPage> {
             const NomabeTextFieldWidget(
               textState: 1,
             ),
-            const NomabeTextFieldWidget(
-              textState: 2,
-            ),
             NomabeLowPadding(
                 child: Column(
               children: [
