@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:nomabe/core/data/constants/mocks/listitemrequestmock.dart';
 import 'package:nomabe/list/data/model/productmodel.dart';
+import 'package:nomabe/list/presentation/cubit/listcubit.dart';
 import 'package:nomabe/list/presentation/widget/productwidget.dart';
 
 class ListPage extends StatefulWidget {
@@ -8,284 +12,44 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+  ListCubit cubit = GetIt.I.get<ListCubit>();
+
   @override
   Widget build(BuildContext context) {
-    List<ProductItem> items = [
-      ProductItem(
-        itemName: 'Refeição 1',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Arroz',
-              weight: 100,
-              calories: 130,
-              proteins: 2.5,
-              fats: 0.3,
-              carbohydrates: 28,
-            ),
-            NutritionItem(
-              itemName: 'Feijão',
-              weight: 100,
-              calories: 116,
-              proteins: 7.5,
-              fats: 0.5,
-              carbohydrates: 20,
-            ),
-          ],
-        ),
-        itemPrice: 10.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 2',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Frango',
-              weight: 100,
-              calories: 165,
-              proteins: 31,
-              fats: 3.6,
-              carbohydrates: 0,
-            ),
-            NutritionItem(
-              itemName: 'Salada',
-              weight: 100,
-              calories: 15,
-              proteins: 1.2,
-              fats: 0.2,
-              carbohydrates: 3,
-            ),
-          ],
-        ),
-        itemPrice: 12.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 1',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Arroz',
-              weight: 100,
-              calories: 130,
-              proteins: 2.5,
-              fats: 0.3,
-              carbohydrates: 28,
-            ),
-            NutritionItem(
-              itemName: 'Feijão',
-              weight: 100,
-              calories: 116,
-              proteins: 7.5,
-              fats: 0.5,
-              carbohydrates: 20,
-            ),
-          ],
-        ),
-        itemPrice: 10.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 2',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Frango',
-              weight: 100,
-              calories: 165,
-              proteins: 31,
-              fats: 3.6,
-              carbohydrates: 0,
-            ),
-            NutritionItem(
-              itemName: 'Salada',
-              weight: 100,
-              calories: 15,
-              proteins: 1.2,
-              fats: 0.2,
-              carbohydrates: 3,
-            ),
-          ],
-        ),
-        itemPrice: 12.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 1',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Arroz',
-              weight: 100,
-              calories: 130,
-              proteins: 2.5,
-              fats: 0.3,
-              carbohydrates: 28,
-            ),
-            NutritionItem(
-              itemName: 'Feijão',
-              weight: 100,
-              calories: 116,
-              proteins: 7.5,
-              fats: 0.5,
-              carbohydrates: 20,
-            ),
-          ],
-        ),
-        itemPrice: 10.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 2',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Frango',
-              weight: 100,
-              calories: 165,
-              proteins: 31,
-              fats: 3.6,
-              carbohydrates: 0,
-            ),
-            NutritionItem(
-              itemName: 'Salada',
-              weight: 100,
-              calories: 15,
-              proteins: 1.2,
-              fats: 0.2,
-              carbohydrates: 3,
-            ),
-          ],
-        ),
-        itemPrice: 12.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 1',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Arroz',
-              weight: 100,
-              calories: 130,
-              proteins: 2.5,
-              fats: 0.3,
-              carbohydrates: 28,
-            ),
-            NutritionItem(
-              itemName: 'Feijão',
-              weight: 100,
-              calories: 116,
-              proteins: 7.5,
-              fats: 0.5,
-              carbohydrates: 20,
-            ),
-          ],
-        ),
-        itemPrice: 10.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 2',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Frango',
-              weight: 100,
-              calories: 165,
-              proteins: 31,
-              fats: 3.6,
-              carbohydrates: 0,
-            ),
-            NutritionItem(
-              itemName: 'Salada',
-              weight: 100,
-              calories: 15,
-              proteins: 1.2,
-              fats: 0.2,
-              carbohydrates: 3,
-            ),
-          ],
-        ),
-        itemPrice: 12.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 1',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Arroz',
-              weight: 100,
-              calories: 130,
-              proteins: 2.5,
-              fats: 0.3,
-              carbohydrates: 28,
-            ),
-            NutritionItem(
-              itemName: 'Feijão',
-              weight: 100,
-              calories: 116,
-              proteins: 7.5,
-              fats: 0.5,
-              carbohydrates: 20,
-            ),
-          ],
-        ),
-        itemPrice: 10.99,
-      ),
-      ProductItem(
-        itemName: 'Refeição 2',
-        itemImage:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images',
-        itemNutrition: NutritionValues(
-          nutritionItems: [
-            NutritionItem(
-              itemName: 'Frango',
-              weight: 100,
-              calories: 165,
-              proteins: 31,
-              fats: 3.6,
-              carbohydrates: 0,
-            ),
-            NutritionItem(
-              itemName: 'Salada',
-              weight: 100,
-              calories: 15,
-              proteins: 1.2,
-              fats: 0.2,
-              carbohydrates: 3,
-            ),
-          ],
-        ),
-        itemPrice: 12.99,
-      ),
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: Text('List Page'),
       ),
-      body: ListView.builder(
-        // colocar blocProvider aqui
-        itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ProductWidget(
-            productItem: items[index],
-          );
-        },
-      ),
+      body: BlocProvider(
+          create: (_) => cubit,
+          child: BlocBuilder<ListCubit, ListState>(builder: (context, state) {
+            switch (state) {
+              case ListErrorState:
+                // TODO: Add the button to load the page again
+                // remove the circular indicator
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+
+              case ListResultState:
+                final result = (state as ListResultState).result;
+
+                return ListView.builder(
+                  // colocar blocProvider aqui
+                  itemCount: result.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ProductWidget(
+                      productItem: result[index],
+                    );
+                  },
+                );
+
+              default:
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+            }
+          })),
     );
   }
 }

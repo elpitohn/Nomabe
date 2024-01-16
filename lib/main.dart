@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nomabe/core/data/dependency/dependencyinjection.dart';
 import 'package:nomabe/core/router/router.dart';
 
 import 'core/themes/nomabetheme.dart';
 
 void main() {
+  configureDependencies();
   runZonedGuarded(() {
     runApp(const MainApp());
   }, (error, stackTrace) {

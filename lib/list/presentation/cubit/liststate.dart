@@ -5,7 +5,7 @@ abstract class ListState extends Equatable {
 
   const factory ListState.loading() = ListLoadingState;
 
-  const factory ListState.result(ProductItem result) = ListResultState;
+  const factory ListState.result(List<ProductItem> result) = ListResultState;
 
   const factory ListState.error() = ListErrorState;
 
@@ -23,7 +23,7 @@ class ListErrorState extends ListState {
 
 class ListResultState extends ListState {
   const ListResultState(this.result);
-  final ProductItem result;
+  final List<ProductItem> result;
 
   @override
   List<Object?> get props => [result];

@@ -1,12 +1,7 @@
+import 'package:injectable/injectable.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../login/presentation/loginpage.dart';
+final GetIt getIt = GetIt.instance;
 
-GetIt locator = GetIt.I;
-
-class DependencyInjection {
-  initLocator() {
-    // Adicionar as deps aqui
-    // locator.registerFactory<LoginPage>(() => LoginPage());
-  }
-}
+@injectableInit
+void configureDependencies() => $initGetIt(getIt);
