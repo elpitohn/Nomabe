@@ -15,7 +15,7 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(
+      padding: const EdgeInsets.all(
         NomabeDimens.nomabe_med_size,
       ),
       child: Container(
@@ -32,7 +32,7 @@ class ProductWidget extends StatelessWidget {
             SizedBox(
               height: NomabeDimens.nomabe_std_card_height,
               child: ClipRRect(
-                borderRadius: BorderRadius.vertical(
+                borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(
                     NomabeDimens.nomabe_rounded_value,
                   ),
@@ -48,7 +48,7 @@ class ProductWidget extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(
+              padding: const EdgeInsets.all(
                 NomabeDimens.nomabe_med_size,
               ),
               child: Column(
@@ -62,7 +62,7 @@ class ProductWidget extends StatelessWidget {
                             productItem.itemName,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: NomabeTokens.nomabeBlack,
                               fontSize: NomabeDimens.nomabe_title_text_size,
                             ),
@@ -90,7 +90,7 @@ class ProductWidget extends StatelessWidget {
                         productItem.itemNutrition.getDescription(),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: NomabeDimens.nomabe_bottom_text_size,
                         ),
                       ),

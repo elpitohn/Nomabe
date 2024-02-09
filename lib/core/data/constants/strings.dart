@@ -4,6 +4,7 @@ class CoreStrings {
   static const String numberValidator = "Por favor, entre um número válido";
   static const String passwordHintText = "**********";
   static const String searchHintText = "Buscar";
+  static const String askAi = "Pedir com o Assistente";
 }
 
 class RouteNameConstants {

@@ -1,8 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nomabe/core/data/constants/strings.dart';
-import 'package:nomabe/core/themes/nomabetheme.dart';
-import 'package:nomabe/home/presentation/homepage.dart';
 import 'package:nomabe/list/presentation/listpage.dart';
 import 'package:nomabe/splash/presentation/widget/splash.dart';
 

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nomabe/core/themes/nomabetokens.dart';
-import 'package:nomabe/core/widgets/nomabepadding.dart';
 
 class NomabeExpandedPrimaryButton extends StatelessWidget {
-  NomabeExpandedPrimaryButton(
+  const NomabeExpandedPrimaryButton(
       {required this.title, required this.onPressed, super.key});
 
   final String title;
@@ -72,7 +71,7 @@ class NomabePrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFF6200EE),
+        backgroundColor: const Color(0xFF6200EE),
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
@@ -97,7 +96,7 @@ class NomabeSecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFF03DAC6),
+        backgroundColor: const Color(0xFF03DAC6),
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
