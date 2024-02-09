@@ -1,6 +1,6 @@
 # NOMABE
 
-Nomabe an application that allows digital nomads to travel the world in a new, fast and simple way
+Nomabe an application for ordering Food with AI
 
 ## Getting Started
 
