@@ -2,11 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:nomabe/core/data/constants/api/apiconstants.dart';
 
 class NomabeRequestMaker {
-  NomabeRequestMaker._();
-
   final Dio _dio = Dio();
 
-  Future<Response> makeGetRequest<T>({
+  Future<Response> makeGetRequest({
     String? baseUrl = APICallConstant.API_BASE_URL,
     String? path = '',
     Object? data,
@@ -17,29 +15,31 @@ class NomabeRequestMaker {
     );
   }
 
-  Future<Response> makePostRequest<T>({
+  Future<Response> makePostRequest({
     String? baseUrl = APICallConstant.API_BASE_URL,
     String? path = '',
     Object? data,
   }) async {
-    return await _dio.post(
-      '$baseUrl/$path',
-      data: data,
-    );
+    return await _dio.post('$baseUrl/$path',
+        data: data,
+        options: Options(headers: <String, String>{
+          "Content-Type": APICallConstant.API_HEADER,
+        }));
   }
 
-  Future<Response> makePutRequest<T>({
+  Future<Response> makePutRequest({
     String? baseUrl = APICallConstant.API_BASE_URL,
     String? path = '',
     Object? data,
   }) async {
-    return await _dio.put(
-      '$baseUrl/$path',
-      data: data,
-    );
+    return await _dio.put('$baseUrl/$path',
+        data: data,
+        options: Options(headers: <String, String>{
+          "Content-Type": APICallConstant.API_HEADER,
+        }));
   }
 
-  Future<Response> makeDeleteRequest<T>({
+  Future<Response> makeDeleteRequest({
     String? baseUrl = APICallConstant.API_BASE_URL,
     String? path = '',
     Object? data,
