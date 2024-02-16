@@ -26,7 +26,7 @@ class _MainPageState extends State<MainPage> {
           onPressed: () => {
             // rota para camera
           },
-          child: Text("COMEÇAR"),
+          child: const Text("COMEÇAR"),
         ),
       ),
     );

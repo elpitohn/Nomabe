@@ -29,8 +29,8 @@ class _LoginPageState extends State<LoginPage> {
         child: ListView(
           shrinkWrap: true,
           children: [
-            NomabeMidPadding(
-                child: const NomabeImageIconResizable(
+            const NomabeMidPadding(
+                child: NomabeImageIconResizable(
               name: "nomabe_logo",
               scale: 2.0,
               width: 200,

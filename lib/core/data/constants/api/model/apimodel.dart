@@ -2,10 +2,10 @@ class ApiRequestModel {
   ApiRequestModel({
     required this.authorization,
     this.openAiOrganization,
-    this.openAiBody,
+    this.data,
   });
 
   String authorization;
   String? openAiOrganization;
-  String? openAiBody;
+  Map<String, dynamic>? data;
 }

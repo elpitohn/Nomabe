@@ -26,7 +26,7 @@ class _ListPageState extends State<ListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List Page'),
+        title: const Text('List Page'),
       ),
       body: BlocProvider(
           create: (_) => cubit,

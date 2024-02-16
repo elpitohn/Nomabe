@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NomabeLowPadding extends StatelessWidget {
-  NomabeLowPadding(
+  const NomabeLowPadding(
       {required this.child,
       this.hasLeftPadding = false,
       this.hasRightPadding = false,
@@ -25,7 +25,7 @@ class NomabeLowPadding extends StatelessWidget {
 }
 
 class NomabeMidPadding extends StatelessWidget {
-  NomabeMidPadding(
+  const NomabeMidPadding(
       {required this.child,
       this.hasLeftPadding = false,
       this.hasRightPadding = false,
@@ -49,7 +49,7 @@ class NomabeMidPadding extends StatelessWidget {
 }
 
 class NomabeHighadding extends StatelessWidget {
-  NomabeHighadding(
+  const NomabeHighadding(
       {required this.child,
       this.hasLeftPadding = false,
       this.hasRightPadding = false,

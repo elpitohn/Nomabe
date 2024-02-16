@@ -29,8 +29,8 @@ class _RegisterPageState extends State<RegisterPage> {
         child: ListView(
           shrinkWrap: true,
           children: [
-            NomabeMidPadding(
-              child: const NomabeImageIconResizable(
+            const NomabeMidPadding(
+              child: NomabeImageIconResizable(
                 name: "nomabe_logo",
                 scale: 1,
                 width: 100,
