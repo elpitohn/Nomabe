@@ -39,8 +39,10 @@ dev_dependencies:
   mockito: ^5.4.2
   network_image_mock: ^2.1.1
   injectable_generator: ^2.4.1
+  flutter_dotenv: ^5.1.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/icons/nomabe_logo.png
+    - assets/.env
