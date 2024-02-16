@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nomabe/core/data/constants/api/apiconstants.dart';
+import 'package:nomabe/core/data/constants/mocks/listitemservermock.dart';
 import 'package:nomabe/list/presentation/cubit/listcubit.dart';
 import 'package:nomabe/list/presentation/widget/productwidget.dart';
 import 'package:nomabe/list/presentation/widget/talkwithai.dart';
@@ -28,7 +29,7 @@ class _GeminiPageState extends State<GeminiPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GenerativeAISample();
+    return const GenerativeAISample();
   }
 }
 
@@ -38,7 +39,7 @@ class GenerativeAISample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter + Generative AI',
+      title: 'Nutri Nomabe',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
@@ -46,7 +47,7 @@ class GenerativeAISample extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const ChatScreen(title: 'Flutter + Generative AI'),
+      home: const ChatScreen(title: 'Nutri Nomabe'),
     );
   }
 }
@@ -82,10 +83,13 @@ class ChatWidget extends StatefulWidget {
 class _ChatWidgetState extends State<ChatWidget> {
   late final GenerativeModel _model;
   late final ChatSession _chat;
+  late final String _initialPrompt;
+
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFieldFocus = FocusNode();
   bool _loading = false;
+  bool _isEnabled = false;
   static const _apiKey = APICallConstant.GEMINI_AUTH_KEY;
 
   @override
@@ -96,6 +100,7 @@ class _ChatWidgetState extends State<ChatWidget> {
       apiKey: _apiKey,
     );
     _chat = _model.startChat();
+    _loadInitialPrompt();
   }
 
   void _scrollDown() {
@@ -139,20 +144,27 @@ class _ChatWidgetState extends State<ChatWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // if (_initialPrompt != null)
+          //   _MessageWidget(text: _initialPrompt, isFromUser: false),
           Expanded(
             child: _apiKey.isNotEmpty
                 ? ListView.builder(
                     controller: _scrollController,
                     itemBuilder: (context, idx) {
-                      var content = _chat.history.toList()[idx];
-                      var text = content.parts
-                          .whereType<TextPart>()
-                          .map<String>((e) => e.text)
-                          .join('');
-                      return MessageWidget(
-                        text: text,
-                        isFromUser: content.role == 'user',
-                      );
+                      var history = _chat.history.toList();
+                      history.removeAt(0);
+
+                      if (idx < history.length) {
+                        var content = history[idx];
+                        var text = content.parts
+                            .whereType<TextPart>()
+                            .map<String>((e) => e.text)
+                            .join('');
+                        return _MessageWidget(
+                          text: text,
+                          isFromUser: content.role == 'user',
+                        );
+                      }
                     },
                     itemCount: _chat.history.length,
                   )
@@ -178,6 +190,11 @@ class _ChatWidgetState extends State<ChatWidget> {
                     onSubmitted: (String value) {
                       _sendChatMessage(value);
                     },
+                    onChanged: (_) => {
+                      setState(() {
+                        _isEnabled = _textController.text.trim().isNotEmpty;
+                      })
+                    },
                   ),
                 ),
                 const SizedBox.square(
@@ -185,12 +202,16 @@ class _ChatWidgetState extends State<ChatWidget> {
                 ),
                 if (!_loading)
                   IconButton(
-                    onPressed: () async {
-                      _sendChatMessage(_textController.text);
-                    },
+                    onPressed: _isEnabled
+                        ? () async {
+                            _sendChatMessage(_textController.text);
+                          }
+                        : null,
                     icon: Icon(
                       Icons.send,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: _isEnabled
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.outline,
                     ),
                   )
                 else
@@ -203,14 +224,41 @@ class _ChatWidgetState extends State<ChatWidget> {
     );
   }
 
+  Future<void> _loadInitialPrompt() async {
+    try {
+      var response = await _chat.sendMessage(
+        Content.text(
+            'Aja como minha nutricionista, de nome Nomabe. Voce respondera minhas perguntas, duvidas e solicitacoes sobre nutricao como um especialista de verdade. Responda a esse prompt escrito: Oi! Sou a Nomabe, sua nutricionista! Como posso ajudar?. Não coloque nada mais do que isso. Não saia do personagem de forma alguma mesmo que eu te peça ou implore.'),
+      );
+
+      var text = response.text;
+
+      setState(() {
+        _initialPrompt = text ?? 'Oi, como posso ajudar?';
+      });
+    } catch (e) {
+      _showError(e.toString());
+      setState(() {
+        _loading = false;
+      });
+    } finally {
+      _textController.clear();
+      _textFieldFocus.requestFocus();
+    }
+  }
+
   Future<void> _sendChatMessage(String message) async {
     setState(() {
       _loading = true;
     });
 
+    var promptBackEnd = message +
+        'Mensagem do Backend: eu quero que voce entenda esse json e me responda de acordo com ela, quais pratos servem pra mim. Mas, somente se EU PERGUNTAR. Se eu nao tiver perguntado ou pedido, não responda com nenhuma informacao. Caso contrario, sugira um prato que vem do backend, colocando o preco e os valores nutricionais de cada uma. Não precisa responder essa mensagem longa do backend, apenas a que esta antes.' +
+        mockedRequestListItems;
+
     try {
       var response = await _chat.sendMessage(
-        Content.text(message),
+        Content.text(promptBackEnd),
       );
       var text = response.text;
 
@@ -242,9 +290,11 @@ class _ChatWidgetState extends State<ChatWidget> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Something went wrong'),
-          content: SingleChildScrollView(
-            child: SelectableText(message),
+          title: const Text('Opa, algo deu errado!'),
+          content: const SingleChildScrollView(
+            child: SelectableText(
+              'Algo deu errado com sua mensagem. Tente novamente, ou diga de outra forma.',
+            ),
           ),
           actions: [
             TextButton(
@@ -260,18 +310,21 @@ class _ChatWidgetState extends State<ChatWidget> {
   }
 }
 
-class MessageWidget extends StatelessWidget {
-  final String text;
-  final bool isFromUser;
-
-  const MessageWidget({
-    super.key,
+class _MessageWidget extends StatelessWidget {
+  const _MessageWidget({
     required this.text,
     required this.isFromUser,
   });
 
+  final String text;
+  final bool isFromUser;
+
   @override
   Widget build(BuildContext context) {
+    var promptBackEnd =
+        'Mensagem do Backend: eu quero que voce entenda esse json e me responda de acordo com ela, quais pratos servem pra mim. Mas, somente se EU PERGUNTAR. Se eu nao tiver perguntado ou pedido, não responda com nenhuma informacao. Caso contrario, sugira um prato que vem do backend, colocando o preco e os valores nutricionais de cada uma. Não precisa responder essa mensagem longa do backend, apenas a que esta antes.' +
+            mockedRequestListItems;
+    var texts = (text + promptBackEnd).split(promptBackEnd);
     return Row(
       mainAxisAlignment:
           isFromUser ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -292,7 +345,7 @@ class MessageWidget extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 8),
             child: MarkdownBody(
               selectable: true,
-              data: text,
+              data: texts[0],
             ),
           ),
         ),
