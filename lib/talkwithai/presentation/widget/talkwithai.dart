@@ -4,12 +4,7 @@ import 'package:nomabe/core/themes/nomabedimens.dart';
 import 'package:nomabe/core/widgets/nomabebutton.dart';
 
 class TalkWithAiButton extends StatelessWidget {
-  const TalkWithAiButton({
-    required this.onPressed,
-    super.key,
-  });
-
-  final Function onPressed;
+  const TalkWithAiButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +15,7 @@ class TalkWithAiButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: NomabePrimaryButton(
-          onPressed,
+          () => {},
           title: CoreStrings.askAi,
         ),
       ),

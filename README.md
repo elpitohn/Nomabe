@@ -1,6 +1,6 @@
 # NOMABE
 
-Nomabe an application for ordering Food with AI
+Nomabe an application for ordering Food with Google GEMINI
 
 ## Getting Started
 

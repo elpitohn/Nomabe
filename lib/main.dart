@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nomabe/core/data/dependency/dependencyinjection.dart';
 import 'package:nomabe/core/router/router.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'core/themes/nomabetheme.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load();
   configureDependencies();
   runZonedGuarded(() {
     runApp(const MainApp());

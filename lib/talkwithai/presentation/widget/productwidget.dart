@@ -5,12 +5,12 @@ import 'package:nomabe/core/themes/nomabetokens.dart';
 import 'package:nomabe/list/data/model/productmodel.dart';
 
 class ProductWidget extends StatelessWidget {
+  final ProductItem productItem;
+
   const ProductWidget({
     super.key,
     required this.productItem,
   });
-
-  final ProductItem productItem;
 
   @override
   Widget build(BuildContext context) {

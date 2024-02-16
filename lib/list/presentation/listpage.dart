@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:nomabe/core/data/constants/strings.dart';
+import 'package:nomabe/core/router/router.dart';
 import 'package:nomabe/list/presentation/cubit/listcubit.dart';
 import 'package:nomabe/list/presentation/widget/productwidget.dart';
 import 'package:nomabe/list/presentation/widget/talkwithai.dart';
@@ -57,7 +59,11 @@ class _ListPageState extends State<ListPage> {
                     // const SizedBox(
                     //   height: NomabeDimens.nomabe_med_size,
                     // ),
-                    const TalkWithAiButton(),
+                    TalkWithAiButton(
+                        onPressed: () => {
+                              NomabeRouter.router
+                                  .pushNamed(RouteNameConstants.chat)
+                            }),
                     const SizedBox(
                       height: 20,
                     ),

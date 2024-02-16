@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nomabe/core/data/constants/strings.dart';
 import 'package:nomabe/list/presentation/listpage.dart';
 import 'package:nomabe/splash/presentation/widget/splash.dart';
+import 'package:nomabe/talkwithai/presentation/geminipage.dart';
 
 import '../../login/presentation/loginpage.dart';
 import '../../register/presentation/registerpage.dart';
@@ -49,21 +50,21 @@ class NomabeRouter {
             body: ListPage(),
           )),
     ),
-    // GoRoute(
-    //   name: RouteNameConstants.home,
-    //   path: "/home",
-    //   pageBuilder: (context, state) {
-    //     final args = state.extra as Map<String, dynamic>?;
+    GoRoute(
+      name: RouteNameConstants.chat,
+      path: "/chat",
+      pageBuilder: (context, state) {
+        // final args = state.extra as Map<String, dynamic>?;
 
-    //     final String title = args?["pageTitle"] ?? "";
-    //     final String userId = args?["userId"] ?? "";
+        // final String title = args?["pageTitle"] ?? "";
+        // final String userId = args?["userId"] ?? "";
 
-    //     return MaterialPage(
-    //         key: state.pageKey,
-    //         child: Scaffold(
-    //           body: MainPage(title: title, userId: userId),
-    //         ));
-    //   },
-    // ),
+        return MaterialPage(
+            key: state.pageKey,
+            child: Scaffold(
+              body: GeminiPage(),
+            ));
+      },
+    ),
   ]);
 }
