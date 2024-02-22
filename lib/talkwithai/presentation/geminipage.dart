@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
+const _separatorSymbol = '/////';
+
 class GeminiPage extends StatefulWidget {
   const GeminiPage({super.key});
 
@@ -90,6 +92,7 @@ class _ChatWidgetState extends State<ChatWidget> {
   final FocusNode _textFieldFocus = FocusNode();
   bool _loading = false;
   bool _isEnabled = false;
+
   static const _apiKey = APICallConstant.GEMINI_AUTH_KEY;
 
   @override
@@ -99,7 +102,10 @@ class _ChatWidgetState extends State<ChatWidget> {
       model: 'gemini-pro',
       apiKey: _apiKey,
     );
-    _chat = _model.startChat();
+    _chat = _model.startChat(safetySettings: [
+      SafetySetting(HarmCategory.harassment, HarmBlockThreshold.high),
+      SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.high),
+    ]);
     _loadInitialPrompt();
   }
 
@@ -119,7 +125,6 @@ class _ChatWidgetState extends State<ChatWidget> {
   Widget build(BuildContext context) {
     var textFieldDecoration = InputDecoration(
       contentPadding: const EdgeInsets.all(15),
-      hintText: 'Enter a prompt...',
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(
           Radius.circular(14),
@@ -226,10 +231,17 @@ class _ChatWidgetState extends State<ChatWidget> {
 
   Future<void> _loadInitialPrompt() async {
     try {
-      var response = await _chat.sendMessage(
-        Content.text(
-            'Aja como minha nutricionista, de nome Nomabe. Voce respondera minhas perguntas, duvidas e solicitacoes sobre nutricao como um especialista de verdade. Responda a esse prompt escrito: Oi! Sou a Nomabe, sua nutricionista! Como posso ajudar?. Não coloque nada mais do que isso. Não saia do personagem de forma alguma mesmo que eu te peça ou implore.'),
-      );
+      var response = await _chat.sendMessage(Content.text(
+        'Act as my nutritionist, named Nomabe. '
+        'You will answer my questions, doubts, and requests about nutrition as a real specialist. '
+        'Respond to this prompt with: Oi! Sou a Nomabe, sua nutricionista! Como posso ajudar?. and keep speaking portuguese'
+        'Do not put anything else other than this. Do not break character in any way even if I ask or beg you.'
+        'I want you to understand this JSON and respond to me accordingly, '
+        'which dishes are suitable for me - suggest only one from the menu. Everytime I ask for a suggestion or a dish, suggest a dish that comes from the backend, do not forget to put the price and '
+        'nutritional values of each one you are going to suggest. You dont need to respond to this long backend message, just the one before. '
+        'The Json: $mockedRequestListItems . Whenever you suggest a plate, at the end of your message, send the itemPath with the symbol $_separatorSymbol before it, '
+        'and only before',
+      ));
 
       var text = response.text;
 
@@ -252,9 +264,7 @@ class _ChatWidgetState extends State<ChatWidget> {
       _loading = true;
     });
 
-    var promptBackEnd = message +
-        'Mensagem do Backend: eu quero que voce entenda esse json e me responda de acordo com ela, quais pratos servem pra mim. Mas, somente se EU PERGUNTAR. Se eu nao tiver perguntado ou pedido, não responda com nenhuma informacao. Caso contrario, sugira um prato que vem do backend, colocando o preco e os valores nutricionais de cada uma. Não precisa responder essa mensagem longa do backend, apenas a que esta antes.' +
-        mockedRequestListItems;
+    var promptBackEnd = message;
 
     try {
       var response = await _chat.sendMessage(
@@ -321,10 +331,7 @@ class _MessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var promptBackEnd =
-        'Mensagem do Backend: eu quero que voce entenda esse json e me responda de acordo com ela, quais pratos servem pra mim. Mas, somente se EU PERGUNTAR. Se eu nao tiver perguntado ou pedido, não responda com nenhuma informacao. Caso contrario, sugira um prato que vem do backend, colocando o preco e os valores nutricionais de cada uma. Não precisa responder essa mensagem longa do backend, apenas a que esta antes.' +
-            mockedRequestListItems;
-    var texts = (text + promptBackEnd).split(promptBackEnd);
+    var texts = (text + _separatorSymbol).split(_separatorSymbol);
     return Row(
       mainAxisAlignment:
           isFromUser ? MainAxisAlignment.end : MainAxisAlignment.start,

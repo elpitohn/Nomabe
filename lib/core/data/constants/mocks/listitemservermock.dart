@@ -3,6 +3,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 1",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -28,6 +29,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 2",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -53,6 +55,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 3",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -78,6 +81,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 4",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -103,6 +107,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 5",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -128,6 +133,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 6",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -153,6 +159,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 7",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -178,6 +185,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 8",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -203,6 +211,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 9",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
@@ -228,6 +237,7 @@ const mockedRequestListItems = '''
     {
       "itemName": "Refeição 10",
       "itemImage": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F256124.jpg&f=1&nofb=1&ipt=72a8055710a0c86d941de6722d9a753e0d40ada2b904d051a79dd0bdee892baa&ipo=images",
+      "itemPath": "home",
       "itemNutrition": {
         "nutritionItems": [
           {
