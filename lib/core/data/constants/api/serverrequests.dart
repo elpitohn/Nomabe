@@ -1,60 +1,73 @@
 import 'package:dio/dio.dart';
 import 'package:nomabe/core/data/constants/api/apiconstants.dart';
+import 'package:nomabe/core/data/constants/api/apiconstantsexample.dart';
 import 'package:nomabe/core/data/constants/api/model/apimodel.dart';
 
 class NomabeRequestMaker {
   final Dio _dio = Dio();
 
   Future<Response> makeGetRequest({
-    String? baseUrl = APICallConstant.API_BASE_URL,
+    String? baseUrl,
     String? path = '',
     ApiRequestModel? options,
   }) async {
-    return await _dio.get('$baseUrl/$path',
+    String requestBaseUrl = baseUrl ?? await APICallConstant().API_BASE_URL();
+    String requestApiHeader = await APICallConstant().API_HEADER() ?? '';
+
+    return await _dio.get('$requestBaseUrl/$path',
         data: options?.data,
         options: Options(
           headers: <String, String>{
-            'Content-Type': APICallConstant.API_HEADER,
+            'Content-Type': requestApiHeader,
             'Authorization': options?.authorization ?? '',
           },
         ));
   }
 
   Future<Response> makePostRequest({
-    String? baseUrl = APICallConstant.API_BASE_URL,
+    String? baseUrl,
     String? path = '',
     ApiRequestModel? options,
   }) async {
-    return await _dio.post('$baseUrl/$path',
+    String requestBaseUrl = baseUrl ?? await APICallConstant().API_BASE_URL();
+    String requestApiHeader = await APICallConstant().API_HEADER() ?? '';
+
+    return await _dio.post('$requestBaseUrl/$path',
         data: options?.data,
         options: Options(headers: <String, String>{
-          'Content-Type': APICallConstant.API_HEADER,
+          'Content-Type': requestApiHeader,
           'Authorization': options?.authorization ?? '',
         }));
   }
 
   Future<Response> makePutRequest({
-    String? baseUrl = APICallConstant.API_BASE_URL,
+    String? baseUrl,
     String? path = '',
     ApiRequestModel? options,
   }) async {
-    return await _dio.put('$baseUrl/$path',
+    String requestBaseUrl = baseUrl ?? await APICallConstant().API_BASE_URL();
+    String requestApiHeader = await APICallConstant().API_HEADER() ?? '';
+
+    return await _dio.put('$requestBaseUrl/$path',
         data: options?.data,
         options: Options(headers: <String, String>{
-          'Content-Type': APICallConstant.API_HEADER,
+          'Content-Type': requestApiHeader,
           'Authorization': options?.authorization ?? '',
         }));
   }
 
   Future<Response> makeDeleteRequest({
-    String? baseUrl = APICallConstant.API_BASE_URL,
+    String? baseUrl,
     String? path = '',
     ApiRequestModel? options,
   }) async {
-    return await _dio.delete('$baseUrl/$path',
+    String requestBaseUrl = baseUrl ?? await APICallConstant().API_BASE_URL();
+    String requestApiHeader = await APICallConstant().API_HEADER() ?? '';
+    
+    return await _dio.delete('$requestBaseUrl/$path',
         data: options?.data,
         options: Options(headers: <String, String>{
-          'Content-Type': APICallConstant.API_HEADER,
+          'Content-Type': requestApiHeader,
           'Authorization': options?.authorization ?? '',
         }));
   }

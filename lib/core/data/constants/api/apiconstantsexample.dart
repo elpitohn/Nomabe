@@ -1,10 +1,16 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class APICallConstantExample {
-  //Rename the file, removing the 'Example' from the class name and file name
-  APICallConstantExample._();
-  static const String API_BASE_URL = String.fromEnvironment('NOMABE_API_URL');
-  static const String API_AUTH_BEARER =
-      String.fromEnvironment('NOMABE_API_KEY');
-  static const String API_HEADER = String.fromEnvironment('NOMABE_API_HEADER');
-  static const String GEMINI_AUTH_KEY =
-      String.fromEnvironment('GEMINI_API_KEY');
+  Future<String> API_BASE_URL() async {
+    return dotenv.env['NOMABE_API_URL'] ?? '';
+  }
+  Future<String> API_AUTH_BEARER() async {
+    return dotenv.env['NOMABE_API_KEY'] ?? '';
+  }
+  Future<String> API_HEADER() async {
+    return dotenv.env['NOMABE_API_HEADER'] ?? '';
+  }
+  Future<String?> GEMINI_AUTH_KEY() async {
+    return dotenv.env['GEMINI_API_KEY'] ?? '';
+  }
 }
