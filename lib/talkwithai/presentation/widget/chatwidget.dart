@@ -11,9 +11,11 @@ class ChatWidget extends StatefulWidget {
   const ChatWidget({
     super.key,
     required this.separatorSymbol,
+    required this.listItems,
   });
 
   final String separatorSymbol;
+  final String listItems;
 
   @override
   State<ChatWidget> createState() => _ChatWidgetState();
@@ -39,8 +41,8 @@ class _ChatWidgetState extends State<ChatWidget> {
       _setGemini();
 
       if (_apiKey.isNotEmpty) {
-        _sendChatMessage("Olá!");
         cubit.emmitResultForGemini();
+        _sendChatMessage("Olá!");
       } else {
         cubit.emmitErrorForGemini();
       }
@@ -204,7 +206,7 @@ class _ChatWidgetState extends State<ChatWidget> {
           'which dishes are suitable for me - suggest only one from the menu. Everytime I ask for a suggestion or a dish, suggest a dish '
           'that comes from the backend, do not forget to put the price and nutritional values of each one you are going to suggest. '
           'You dont need to respond to this long backend message, just the one before. '
-          'The Json: $mockedRequestListItems . Whenever you suggest a plate, at the end of your message, send the itemPath with the symbol ${widget.separatorSymbol} before it, '
+          'The Json: ${widget.listItems} . Whenever you suggest a plate, at the end of your message, send the itemPath with the symbol ${widget.separatorSymbol} before it, '
           'and only before',
         ));
 
