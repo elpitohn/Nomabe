@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nomabe/core/data/constants/strings.dart';
 import 'package:nomabe/list/presentation/listpage.dart';
 import 'package:nomabe/splash/presentation/widget/splash.dart';
-import 'package:nomabe/talkwithai/presentation/geminipage.dart';
+import 'package:nomabe/talkwithai/presentation/chatscreen.dart';
 
 import '../../login/presentation/loginpage.dart';
 import '../../register/presentation/registerpage.dart';
@@ -62,7 +62,7 @@ class NomabeRouter {
         return MaterialPage(
             key: state.pageKey,
             child: Scaffold(
-              body: GeminiPage(),
+              body: ChatScreen(),
             ));
       },
     ),
