@@ -13,16 +13,16 @@ abstract class ListCubit extends Cubit<ListState> {
   Future<void> getProductItems();
 
   @factoryMethod
-  factory ListCubit.create() => _ListCubit();
+  factory ListCubit.create() => _ItemsCubit();
 }
 
-class _ListCubit extends ListCubit {
-  _ListCubit() : super();
+class _ItemsCubit extends ListCubit {
+  _ItemsCubit() : super();
 
   @override
   Future<void> getProductItems() async {
     try {
-      // TODO(Andre): Add api request
+      // TODO(Andre): Add request api
       // await Future.delayed(Duration(seconds: 2));
 
       // List<ProductItem> productItems = [];
