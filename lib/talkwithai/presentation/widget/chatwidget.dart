@@ -39,6 +39,7 @@ class _ChatWidgetState extends State<ChatWidget> {
       _setGemini();
 
       if (_apiKey.isNotEmpty) {
+        _sendChatMessage("Olá!");
         cubit.emmitResultForGemini();
       } else {
         cubit.emmitErrorForGemini();
