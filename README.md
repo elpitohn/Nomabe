@@ -55,7 +55,7 @@ We welcome contributions! If you encounter bugs or have suggestions for improvem
 
 ## License
 
-Nomabe is open-sourced under the [MIT License](LICENSE), promoting a collaborative and innovative development environment.
+Nomabe is open-sourced under the [MIT License](LICENSE.md), promoting a collaborative and innovative development environment.
 
 ---
 
