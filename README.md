@@ -1,6 +1,6 @@
 # NOMABE
 
-Nomabe is an innovative application for ordering food, seamlessly integrating the power of Google Gemini to enhance user experience with advanced AI capabilities.
+Nomabe is an innovative application for ordering food, seamlessly integrating the power of Google Gemini to enhance user experience with advanced AI capabilities. This is the Flutter Version, to view the iOS Version, [click here](https://github.com/manbbo/Nomabe-iOS)
 
 ### About Google Gemini
 
